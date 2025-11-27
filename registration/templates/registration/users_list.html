@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Users List</title>
+<style>
+  /* Import Poppins for that modern app feel */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+  body { 
+    font-family: 'Poppins', system-ui, sans-serif; 
+    /* Deep Slate Gradient Background */
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); 
+    color: #e2e8f0; /* Off-white text for readability */
+    padding: 40px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+  }
+
+  .top { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 24px; 
+    width: 100%;
+    max-width: 950px;
+  }
+
+  /* The Card Container */
+  .table-container {
+    /* Dark card background */
+    background: #1e293b; 
+    border-radius: 16px; 
+    /* Subtle border to define edges in dark mode */
+    border: 1px solid #334155; 
+    /* Deep shadow for lift */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+    overflow: hidden; 
+    width: 100%;
+    max-width: 950px;
+  }
+
+  table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    text-align: left;
+  }
+
+  /* Header Styling */
+  th { 
+    background: #0f172a; /* Darker header to separate from rows */
+    color: #94a3b8; /* Muted bluish-gray text */
+    padding: 20px 24px; 
+    font-size: 12px; 
+    font-weight: 600; 
+    text-transform: uppercase; 
+    letter-spacing: 0.1em; 
+    border-bottom: 1px solid #334155;
+  }
+
+  /* Row Data Styling */
+  td { 
+    padding: 20px 24px; 
+    border-bottom: 1px solid #334155; /* Dark borders */
+    font-size: 14px; 
+    color: #f1f5f9; /* Bright text */
+    vertical-align: middle;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  /* Hover Effects */
+  tr { transition: background 0.2s ease; }
+  
+  tr:hover td { 
+    background: #2d3748; /* Slightly lighter charcoal on hover */
+  }
+
+  /* The "Neon" Button */
+  a.button { 
+    padding: 10px 20px; 
+    /* Electric Purple Gradient */
+    background: linear-gradient(90deg, #7c3aed, #db2777); 
+    color: white; 
+    border-radius: 8px; 
+    text-decoration: none; 
+    font-size: 13px; 
+    font-weight: 500; 
+    box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3); /* Glow effect */
+    transition: all 0.2s ease;
+    display: inline-block;
+  }
+
+  a.button:hover { 
+    filter: brightness(1.1); /* Glows brighter on hover */
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(219, 39, 119, 0.5);
+  }
+</style>
+</head>
+<body>
+  <div class="top">
+    <h1 style="margin:0;">All Users</h1>
+    <div>
+      Logged in as <strong>{{ current_user }}</strong>
+      <a href="{% url 'registration:logout_html' %}" class="button" style="margin-left:10px;">Logout</a>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>Date registered</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ u.first_name }}</td>
+        <td>{{ u.last_name }}</td>
+        <td>{{ u.email }}</td>
+        <td>{{ u.gender|default:"N/A" }}</td>
+        <td>{{ u.date_registered|date:"Y-m-d H:i" }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="6">No users yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

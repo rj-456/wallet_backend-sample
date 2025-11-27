@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Login</title>
+<style>
+  /* Import Poppins to match the previous design */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+  body { 
+    font-family: 'Poppins', system-ui, sans-serif; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh; 
+    /* Same Deep Slate Gradient */
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); 
+    color: #e2e8f0;
+    margin: 0;
+  }
+
+  .card { 
+    /* Dark Card Background */
+    background: #1e293b; 
+    padding: 40px; 
+    width: 320px; 
+    /* Dark Border to match table container */
+    border: 1px solid #334155; 
+    border-radius: 16px; /* Matches table radius */
+    /* Deep Shadow for lift */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+  }
+
+  .field { margin-bottom: 24px; }
+
+  label { 
+    display: block; 
+    font-size: 13px; 
+    font-weight: 500;
+    /* Muted Blue-Gray (matches table headers) */
+    color: #94a3b8; 
+    margin-bottom: 8px; 
+    letter-spacing: 0.03em;
+  }
+
+  input[type="text"], input[type="password"] { 
+    width: 100%; 
+    padding: 12px 16px; 
+    /* Darker than card (recessed look) */
+    background: #0f172a; 
+    border: 1px solid #334155; 
+    border-radius: 8px; 
+    box-sizing: border-box; 
+    font-size: 14px;
+    color: #f1f5f9; /* Bright text */
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  input:focus { 
+    outline: none; 
+    /* Purple accent focus */
+    border-color: #7c3aed; 
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+  }
+
+  /* The Neon Gradient Button */
+  button { 
+    width: 100%; 
+    padding: 14px; 
+    border: none; 
+    border-radius: 8px; 
+    /* Electric Purple Gradient */
+    background: linear-gradient(90deg, #7c3aed, #db2777); 
+    color: white; 
+    font-size: 14px; 
+    font-weight: 600; 
+    cursor: pointer;
+    /* Glow effect */
+    box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3); 
+    transition: all 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  button:hover { 
+    filter: brightness(1.1); 
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(219, 39, 119, 0.5);
+  }
+
+  .error { 
+    color: #fca5a5; /* Light red */
+    background: rgba(127, 29, 29, 0.5); /* Dark red transparent bg */
+    font-size: 13px; 
+    margin-bottom: 20px; 
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #7f1d1d;
+  }
+
+  a { 
+    text-decoration: none; 
+    /* Pink accent color for links */
+    color: #db2777; 
+    font-size: 13px; 
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  a:hover { 
+    color: #f472b6; 
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h2>Sign in</h2>
+
+    {% if messages %}
+      {% for msg in messages %}
+        <div class="error">{{ msg }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="field">
+        <label>Email</label>
+        <input name="email" type="text" value="{{ email|default:'' }}" required>
+      </div>
+
+      <div class="field">
+        <label>Password</label>
+        <input name="password" type="password" required>
+      </div>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p style="margin-top:10px; text-align:center;">
+      <a href="{% url 'home_page' %}">Back to homepage</a>
+    </p>
+  </div>
+</body>
+</html>
