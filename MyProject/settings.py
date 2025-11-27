@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-vvsy!n%)+9iit&ms$addc01r%qx%z!+r=o_%!2o6x3c3r*)6-e
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'peitel-backend-ic6h.onrender.com', # Your live Render URL
+    'wallet-backend-sample.onrender.com', # Your live Render URL
     '127.0.0.1', 
     'localhost'
 ]
